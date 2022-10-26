@@ -36,4 +36,10 @@ jobs:
       run: python -m twine upload dist/* --skip-existing -u ${{ secrets.PYPI_CREDENTIALS_USR }} -p ${{ secrets.PYPI_CREDENTIALS_PSW }}
       working-directory: ./python-example-app
     - name: Dockerize
-      run: cd docker && docker build -f Dockerfile -t cnavasdeveloper/github-image-python:latest .
+      run: cd docker && docker build -f Dockerfile -t carlos86/github-image-python:latest .
+    - name: Docker hub authentication
+      run: docker login -u=${{ secrets.DOCKER_HUB_USERNAME }} -p=${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Push
+      run: docker push carlos86/github-image-python:latest
+    - name: Integration test
+      run: docker run carlos86/github-image-python:latest
