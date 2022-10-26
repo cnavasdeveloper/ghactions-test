@@ -43,3 +43,5 @@ jobs:
       run: docker push carlos86/github-image-python:latest
     - name: Integration test
       run: docker run carlos86/github-image-python:latest
+    - name: Debug docker
+      run: docker images
